@@ -9,6 +9,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      height: {
+        "h-screen": {
+          "h-screen": "100vh"
+        }
+      },
       backgroundColor: {
         test: {
           50: "#7159c1"
