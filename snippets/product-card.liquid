@@ -1,9 +1,19 @@
+{% comment %} 
+Accepts:
+- product_product: {Object} Collection or Search object
+- enable_sorting: {Boolean} Show vendor when true
+
+Usage: 
+{% render 'facets', product_product: collection, enable_filtering: true %}
+{% endcomment %}
+
+
 <div class="w-full py-6 px-3">
   <div class="border bg-white shadow-lg rounded-lg overflow-hidden text-zinc-900">
     <a href="{{ product_product.url }}">
       {% if product_product.featured_image %}
         <div class="h-80 overflow-hidden">
-          <img class="w-full object-cover h-full" src="{{ product_product.featured_image |  image_url: width: 600, height: 600 }}" alt="{{ product_product.featured_image.alt }}">  
+          <img class="w-full object-cover h-full transition duration-200 ease-in-out hover:scale-105 transform" src="{{ product_product.featured_image |  image_url: width: 600, height: 600 }}" alt="{{ product_product.featured_image.alt }}">  
         </div>
 
         {% else %}
@@ -12,7 +22,9 @@
     </a>
 
     <div class="flex flex-col p-4">
-      <span class="text-sm text-gray-400">{{ product_product.vendor }}</span>
+      {% if enable_sorting %}
+        <span class="text-sm text-gray-400">{{ product_product.vendor }}</span>
+      {% endif %}
       <a href="{{ product_product.url }}" class="text-gray-700 uppercase font-medium">{{ product_product.title | truncate: 22 }}</a>
       <p class="text-gray-500">{{ product_product.price | money }}</p>
     </div>
