@@ -1,8 +1,18 @@
 {
   "sections": {
     "template": {
-      "type": "template-page"
+      "type": "template-page",
+      "settings": {
+      }
+    },
+    "contact_form_tBkmrL": {
+      "type": "contact-form",
+      "settings": {
+      }
     }
   },
-  "order": ["template"]
+  "order": [
+    "template",
+    "contact_form_tBkmrL"
+  ]
 }
