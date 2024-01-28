@@ -1,3 +1,4 @@
+<script src="{{ 'test.js' | asset_url }}" defer="defer"></script>
 <div class="px-4 py-8">
   <a href="{{ routes.collections_url }}" class="text-base text-gray-300 hover:text-gray-100 hover:underline text-center block my-4">Go back to collections</a>
   {% paginate collection.products by section.settings.number_of_products_per_page %}
@@ -206,6 +207,12 @@
         </div>
       </div>
     </div>
+
+    <provide-test>
+      <div id="ola">
+        eu sou o test
+      </div>
+    </provide-test>
     {% render 'pagination'
       , pagination: paginate %}
   {% endpaginate %}
