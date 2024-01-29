@@ -10,9 +10,7 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        "h-screen": {
-          "h-screen": "100vh"
-        }
+        '94': '22rem'
       },
       backgroundColor: {
         test: {
