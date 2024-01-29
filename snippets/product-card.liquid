@@ -13,7 +13,7 @@ Usage:
     <a href="{{ product_product.url }}">
       {% if product_product.featured_image %}
         <div class="h-80 overflow-hidden">
-          <img class="w-full object-cover h-full transition duration-200 ease-in-out hover:scale-105 transform" src="{{ product_product.featured_image | image_url: width: 600, height: 600 }}" alt="{{ product_product.featured_image.alt }}">  
+          <img class="w-full object-cover h-full transition duration-200 ease-in-out hover:scale-105 transform" src="{{ product_product.featured_image | image_url }}" width="{{ product_product.featured_image.width }}" height="{{ product_product.featured_image.height }}" alt="{{ product_product.featured_image.alt }}" loading="lazy">
         </div>
 
         {% else %}

@@ -14,10 +14,7 @@
                   {% else %}
                     {% assign collection_image = collection.products.first.image %}
                   {% endif %}
-                  <img
-                    class="w-full h-full object-cover transition duration-1000 ease-in-out transform hover:scale-105"
-                    src="{{ collection_image | image_url: width: 600 }}"
-                    alt="{{ collection_image.title | escape }}">
+                    <img class="w-full h-full object-cover transition duration-1000 ease-in-out transform hover:scale-105" src="{{ collection_image | image_url }}" width="{{ collection_image.width }}" height="{{ collection_image.height }}" alt="{{ collection_image.title | escape }}" loading="lazy">
                 </div>
               </a>
 
@@ -33,15 +30,15 @@
 </div>
 
 {% schema %}
-  {
-    "name": "Template List Collections",
-    "settings": [
-      {
-        "type": "text",
-        "id": "title",
-        "default": "Colleciotns",
-        "label": "Title"
-      }
-    ]
-  }
+{
+  "name": "Template List Collections",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Colleciotns",
+      "label": "Title"
+    }
+  ]
+}
 {% endschema %}
