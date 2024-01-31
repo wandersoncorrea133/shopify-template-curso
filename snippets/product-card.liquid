@@ -7,13 +7,36 @@ Usage:
 {% render 'facets', product_product: collection, enable_filtering: true %}
 {% endcomment %}
 
+{% comment %} <style>
+.testHover__image {
+  transition: visibility 0.2s ease-in-out;
+}
+.testHover__image:hover > .current__image {
+    visibility: hidden;
+  }
+  .testHover__image:hover > .hover__image {
+    visibility: visible;
+  }
+
+  .hover__image {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+  }
+</style> {% endcomment %}
 
 <div class="w-full py-6 px-3">
   <div class="border bg-white shadow-lg rounded-lg overflow-hidden text-zinc-900">
     <a href="{{ product_product.url }}">
       {% if product_product.featured_image %}
-        <div class="h-80 overflow-hidden">
+        <div class="testHover__image relative h-80 overflow-hidden">
           <img class="w-full object-cover h-full transition duration-200 ease-in-out hover:scale-105 transform" src="{{ product_product.featured_image | image_url }}" width="{{ product_product.featured_image.width }}" height="{{ product_product.featured_image.height }}" alt="{{ product_product.featured_image.alt }}" loading="lazy">
+
+          {% comment %} {% if product_product.metafields.custom.image_2 != blank %}
+            <img class="hover__image w-full object-cover h-full transition duration-200 ease-in-out hover:scale-105 transform" src="{{ product_product.metafields.custom.image_2 | image_url }}" width="{{ product_product.featured_image.width }}" height="{{ product_product.featured_image.height }}" alt="{{ product_product.featured_image.alt }}" loading="lazy">
+          {% endif %} {% endcomment %}
+
+          
         </div>
 
         {% else %}
@@ -30,3 +53,9 @@ Usage:
     </div>
   </div>
  </div>
+
+ <script>
+  console.log( {{ product_product | json }}, "asçlddsfj")
+ </script>
+
+ 

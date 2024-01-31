@@ -1,10 +1,16 @@
 {% assign main_menu_linklist = linklists[section.settings.menu].links %}
 
+<style>
+  .menuIcon__container > svg {
+    color: #000;
+  }
+</style>
+
 <div class="text-white bg-red-900 h-9">
   {{ shop.brand }}
 </div>
 
-<div class="relative bg-white" x-data="{ mobileMenuOpen: true }">
+<div class="relative bg-white" x-data="{ mobileMenuOpen: false, searchBarOpen: false }">
   <div class="mx-auto px-4 sm:px-6">
     <div class="flex justify-between items-center py-6 md:justify-start md:space-x-10">
       <!-- STORE NAME / STORE LOGO -->
@@ -16,7 +22,7 @@
         <button
           x-on:click="mobileMenuOpen = true"
           type="button"
-          class="bg-white p-2 inline-flex items-center justify-center focus:outline-none">
+          class="menuIcon__container bg-white p-2 inline-flex items-center justify-center focus:outline-none">
           {% render 'icon-menu' %}
         </button>
       </div>
@@ -61,7 +67,11 @@
         {% endfor %}
       </nav>
 
+      {% comment %} CART BUTTON / ACCOUNT LINKS IF ENABLED {% endcomment %}
       <div class="hidden md:flex items-center justify-end md:flex-1 space-x-5">
+        <button x-on:click="searchBarOpen = true" type="button" class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
+          {% render 'icon-search' %}
+        </button>
         <a href="{{ routes.cart_url }}" class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
           {% render 'icon-shopping-bag' %}
         </a>
@@ -124,6 +134,22 @@
           </nav>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div x-show="searchBarOpen" class="w-full absolute top-0 bg-white border">
+    <button type="button" x-on:click="searchBarOpen = false" class="absolute top-0 right-0 mr-5 mt-5 text-gray-500">
+      {% render 'icon-close' %}
+    </button>
+    <div class="h-40 flex justify-center items-center">
+        <form action="{{ routes.search_url }}" method="get" class="flex-auto">
+          <div class="relative text-gray-500 px-10 border border-gray-900">
+            <input class="w-full bg-white h-10 px-5 pr-10 focus:outline-none" type="text" name="q" placeholder="Search">
+            <button type="submit" class="absolute right-0 rounded-full text-sm top-0 mt-2 mr-2 md:mr-20">
+              {% render 'icon-search' %}
+            </button>
+          </div>
+        </form>
     </div>
   </div>
 </div>
