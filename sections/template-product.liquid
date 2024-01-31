@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+<link rel="stylesheet" href="{{ 'swiper.css' | asset_url }}"
 />
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{{ 'swiper.js' | asset_url }}" defer></script>
 
 {% assign selected_variant = product.selected_or_first_available_variant %}
 
@@ -230,18 +230,25 @@
 </script>
 
 <script>
-  const swiper = new Swiper('.swiper', {
-    direction: 'horizontal',
+  window.addEventListener('DOMContentLoaded', function() {
+    try {
+      const swiper = new Swiper('.swiper', {
+        direction: 'horizontal',
 
-    pagination: {
-      el: '.swiper-pagination'
-    },
+        pagination: {
+          el: '.swiper-pagination'
+        },
 
-    navigation: {
-      prevEl: '.swiper-button-prev',
-      nextEl: '.swiper-button-next'
+        navigation: {
+          prevEl: '.swiper-button-prev',
+          nextEl: '.swiper-button-next'
+        }
+      })
+    } catch(err) {
+        console.log("SwipperJS  is not defined")
     }
   })
+  
 </script>
 
 {% schema %}
