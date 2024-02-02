@@ -3,16 +3,16 @@
     <div class="w-1/2">
       <h1 class="text-2xl font-bold text-gray-300">Order {{ order.name }}</h1>
 
-      <p class="text-gray-500 my-2">
-        placed on {{ order.created_at | date: format: 'date' }}
-      </p>
+      <p class="text-gray-500 my-2">placed on {{ order.created_at | date: format: 'date' }}</p>
 
       <span class="text-sm text-white bg-gray-400 rounded-full my-2 px-4 py-1">
         {{ order.financial_status_label }}
       </span>
     </div>
 
-    <a href="{{ routes.account_url }}" class="text-blue-500 hover:text-blue-900 underline font-medium">Back to account</a>
+    <a href="{{ routes.account_url }}" class="text-blue-500 hover:text-blue-900 underline font-medium"
+      >Back to account</a
+    >
   </div>
 
   <div>
@@ -22,7 +22,7 @@
           <div class="w-full h-80 min-h-80 bg-gray-200 rounded-md overflow-hidden border">
             {% if line_item.image %}
               <img
-                class="w-full h-full object-center object-cover" 
+                class="w-full h-full object-center object-cover"
                 src="{{ line_item.image | image_url: width: 300, height: 300 }}"
                 width="300"
                 height="300"
@@ -30,7 +30,7 @@
                 alt="{{ line_item.image.alt }}"
               >
             {% else %}
-                {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover' }}
+              {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover' }}
             {% endif %}
           </div>
 
@@ -77,26 +77,29 @@
         </div>
 
         <div class="p-4 md:p-12">
-          <h1 class="text-lg font-medium mb-4">
-            fulfillment
-          </h1>
+          <h1 class="text-lg font-medium mb-4">fulfillment</h1>
 
           {% if line_item.successfully_fulfilled_quantity > 0 %}
-              <p class="mb-2">We have fulfilled {{ line_item.successfully_fulfilled_quantity }} items of your recent order.</p>
-              <p class="mb-2">Tracking company: {{ line_item.fulfillment.tracking_company }}</p>
-              <p class="mb-2">Tacking number: {{ line_item.fulfillment.tracking_number }}</p>
+            <p class="mb-2">
+              We have fulfilled {{ line_item.successfully_fulfilled_quantity }} items of your recent order.
+            </p>
+            <p class="mb-2">Tracking company: {{ line_item.fulfillment.tracking_company }}</p>
+            <p class="mb-2">Tacking number: {{ line_item.fulfillment.tracking_number }}</p>
 
-              <a href="{{ line_item.fulfillment.tracking_url }}" target="_blank" class="flex items-center justify-center w-max text-sm text-white font-medium bg-gray-400 hover:bg-gray-700 px-4 py-1 rounded">
-                Track order
-                <span class="flex items-center ml-1">
-                  {% render 'icon-external-link' %}
-                </span>
-              </a>
+            <a
+              href="{{ line_item.fulfillment.tracking_url }}"
+              target="_blank"
+              class="flex items-center justify-center w-max text-sm text-white font-medium bg-gray-400 hover:bg-gray-700 px-4 py-1 rounded"
+            >
+              Track order
+              <span class="flex items-center ml-1">
+                {% render 'icon-external-link' %}
+              </span>
+            </a>
           {% else %}
-              <p class="text-gray-500">This item is not yet fulfiled</p>
+            <p class="text-gray-500">This item is not yet fulfiled</p>
           {% endif %}
         </div>
-        
       </div>
     {% endfor %}
   </div>
@@ -122,7 +125,7 @@
             {% liquid
               if transaction.status == 'success'
                 assign background = 'bg-green-700'
-              else 
+              else
                 assign background = 'bg-red-700'
               endif
             %}

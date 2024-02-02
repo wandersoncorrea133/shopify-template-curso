@@ -1,10 +1,13 @@
 <script src="{{ 'test.js' | asset_url }}" defer="defer"></script>
 <div class="px-4 py-8">
-  <a href="{{ routes.collections_url }}" class="text-base text-gray-300 hover:text-gray-100 hover:underline text-center block my-4">Go back to collections</a>
+  <a
+    href="{{ routes.collections_url }}"
+    class="text-base text-gray-300 hover:text-gray-100 hover:underline text-center block my-4"
+    >Go back to collections</a
+  >
   {% paginate collection.products by section.settings.number_of_products_per_page %}
     <h1 class="text-3xl text-center">{{ collection.title }}</h1>
     <div class="flex flex-row gap-4 w-full">
-
       {% comment %} filter here {% endcomment %}
       <form class="bg-violet-800 flex-1">
         {%- for filter in collection.filters -%}
@@ -39,9 +42,14 @@
                           value="{{ filter.true_value.value }}"
                           id="Filter-{{ filter.param_name }}"
                           {% if filter.true_value.active -%}
-                          checked{%- endif %}
+                            checked
+                          {%- endif %}
                           {% if filter.true_value.count == 0 and filter.true_value.active == false -%}
-                          disabled{%- endif -%}>{{ filter.true_value.label }}</label>
+                            disabled
+                          {%- endif -%}
+                        >
+                        {{- filter.true_value.label -}}
+                      </label>
                     </li>
                     <li>
                       <label for="Filter-{{ filter.param_name }}-{{ filter.false_value.value }}">
@@ -51,9 +59,14 @@
                           value="{{ filter.false_value.value }}"
                           id="Filter-{{ filter.param_name }}"
                           {% if filter.false_value.active -%}
-                          checked{%- endif %}
+                            checked
+                          {%- endif %}
                           {% if filter.false_value.count == 0 and filter.false_value.active == false -%}
-                          disabled{%- endif %}>{{ filter.false_value.label }}</label>
+                            disabled
+                          {%- endif %}
+                        >
+                        {{- filter.false_value.label -}}
+                      </label>
                     </li>
                   </ul>
 
@@ -71,9 +84,12 @@
                             value="{{ filter_value.value }}"
                             id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
                             {% if filter_value.active -%}
-                            checked{%- endif %}
+                              checked
+                            {%- endif %}
                             {% if filter_value.count == 0 and filter_value.active == false -%}
-                            disabled{%- endif %}>
+                              disabled
+                            {%- endif %}
+                          >
                           <span>
                             {%- case filter_value.display.type -%}
                               {%- when 'colors' -%}
@@ -92,7 +108,8 @@
                               {{ color }} {{ angle }}deg{%- assign angle = angle | plus: angle_increment %} {{ angle }}deg{%- unless forloop.last %}, {%- endunless -%}
                             {%- endfor -%}
                           {%- endcapture -%}
-                                <span style="
+                                <span
+                                  style="
                                     width: 25px;
                                     height: 25px;
                                     border-radius: 50%;
@@ -100,12 +117,15 @@
                                     justify-content: center;
                                     align-items: center;
                                     background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});
-                                ">
+                                  "
+                                >
                                   test
                                 </span>
                               {%- when 'image' -%}
                                 {{
-                                  filter_value.display.value | image_url: width: 25 | image_tag: alt: filter_value.display.value.alt
+                                  filter_value.display.value
+                                  | image_url: width: 25
+                                  | image_tag: alt: filter_value.display.value.alt
                                 }}
                               {%- else -%}
                                 <span class="visual-display__child"></span>
@@ -129,12 +149,13 @@
                         name="{{ filter.min_value.param_name }}"
                         id="Filter-{{ filter.min_value.param_name }}"
                         {% if filter.min_value.value -%}
-                        value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                          value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
                         {%- endif %}
                         type="number"
                         placeholder="0"
                         min="0"
-                        max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
+                        max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                      >
 
                       <label for="Filter-{{ filter.min_value.param_name }}">From</label>
                     </div>
@@ -145,12 +166,13 @@
                         name="{{ filter.max_value.param_name }}"
                         id="Filter-{{ filter.max_value.param_name }}"
                         {% if filter.max_value.value -%}
-                        value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                          value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
                         {%- endif %}
                         type="number"
                         placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
                         min="0"
-                        max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
+                        max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                      >
 
                       <label for="Filter-{{ filter.max_value.param_name }}">To</label>
                     </div>
@@ -170,8 +192,8 @@
           </p>
 
           {%- for filter in collection.filters -%}
-            {%- if filter.type == "price_range" -%}
-              {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+            {%- if filter.type == 'price_range' -%}
+              {%- if filter.min_value.value != null or filter.max_value.value != null -%}
                 <p>
                   <a href="{{ filter.url_to_remove }}">
                     {%- assign min_value = filter.min_value.value | default: 0 -%}
@@ -183,9 +205,7 @@
             {%- else -%}
               {%- for filter_value in filter.active_values -%}
                 <p>
-                  <a href="{{ filter_value.url_to_remove }}">
-                    {{ filter.label }}: {{ filter_value.label }} X
-                  </a>
+                  <a href="{{ filter_value.url_to_remove }}"> {{ filter.label }}: {{ filter_value.label }} X </a>
                 </p>
               {%- endfor -%}
             {%- endif -%}
@@ -197,10 +217,12 @@
       <div class="max-w-6xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           {% for product in collection.products %}
-            {% render 'product-card'
+            {%
+              render 'product-card'
               , product_product: product
               , enable_sorting: section.settings.enable_sorting
-              , %}
+              ,
+            %}
           {% else %}
             <p>There are no products inside of this collection</p>
           {% endfor %}
@@ -209,15 +231,11 @@
     </div>
 
     <provide-test>
-      <div id="ola">
-        eu sou o test
-      </div>
+      <div id="ola">eu sou o test</div>
     </provide-test>
-    {% render 'pagination'
-      , pagination: paginate %}
+    {% render 'pagination', pagination: paginate %}
   {% endpaginate %}
 </div>
-
 
 {% schema %}
 {

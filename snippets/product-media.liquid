@@ -1,24 +1,28 @@
-{% comment %} 
-  Accepts: 
+{% comment %}
+  Accepts:
    - media: {Object} object of the media
 
-  Usage: 
+  Usage:
     {% render 'product-media', media: media %} send media inside for tag
-
 {% endcomment %}
-
 
 {% case media.media_type %}
   {% when 'image' %}
-    <img class="w-full h-full object-cover" src="{{ media | image_url }}" width="{{ media.width }}" height="{{ media.height }}" alt="{{ media.alt }}" loading="lazy">
-    
+    <img
+      class="w-full h-full object-cover"
+      src="{{ media | image_url }}"
+      width="{{ media.width }}"
+      height="{{ media.height }}"
+      alt="{{ media.alt }}"
+      loading="lazy"
+    >
 
   {% when 'external_video' %}
     {{ media | external_video_tag: class: 'w-full h-80 object-cover' }}
-  
+
   {% when 'video' %}
     {{ media | video_tag: controls: true, class: 'w-full h-full object-cover' }}
-  
+
   {% when 'model' %}
     {{ media | model_viewer_tag }}
 
