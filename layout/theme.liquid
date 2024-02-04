@@ -9,9 +9,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     {{ content_for_header }}
     <!-- Header hook for plugins -->
-    <script src="{{ 'alpine.js' | asset_url }}" async></script>
+
     {{ 'application.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'application.js' | asset_url }}" async></script>
+    <script src="{{ 'alpine.js' | asset_url }}" defer="defer"></script>
+
+    <style>
+      [x-cloak] {
+        display: none !important;
+      }
+    </style>
   </head>
   <body class="bg-zinc-900 text-white">
     {% section 'header' %}

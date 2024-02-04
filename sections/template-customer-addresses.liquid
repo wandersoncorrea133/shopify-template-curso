@@ -1,4 +1,4 @@
-<div class="max-w-6xl mx-auto px-4 py-12" x-data="{ new_address: false}">
+<div class="max-w-6xl mx-auto px-4 py-12" x-data="{ new_address: false}" x-cloak>
   <div class="flex flex-col md:flex-row items-center justify-between my-5 gap-4">
     <h1 class="text-2xl font-bold text-gray-300">Addresses</h1>
     <button
@@ -212,10 +212,16 @@
                 </button>
                 <button
                   class="w-full text-xs font-medium text-gray-700 border py-2"
+                  data-url="{{ address.url }}"
+                  data-delete-address
                 >
                   Delete
                 </button>
               </div>
+
+              <form action="{{ address.url }}" method="post">
+                <input type="hidden" name="_method" value="delete">
+              </form>
             </div>
 
             <div
@@ -408,6 +414,24 @@
     constructor() {
       this.initCustomerAddress();
       this.customerAddressesSelector();
+      this.initDeleteAddressButtons();
+    }
+
+    initDeleteAddressButtons() {
+      const deleteButtons = document.querySelectorAll('button[data-delete-address]');
+
+      if (deleteButtons.length < 1) return;
+
+      deleteButtons.forEach((button) => {
+        button.addEventListener('click', function (e) {
+          const url = this.dataset.url;
+          const confirmation = window.confirm('Do you really wish to delete this address?');
+
+          if (confirmation) {
+            document.querySelector(`form[action="${url}"]`).submit();
+          }
+        });
+      });
     }
 
     initCustomerAddress() {
