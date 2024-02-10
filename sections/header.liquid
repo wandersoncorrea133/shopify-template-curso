@@ -21,10 +21,7 @@
             {{
               settings.logo
               | image_url: width: 600
-              | image_tag:
-                class: 'w-full h-full object-center object-cover w-[220px] h-[auto]',
-                alt: logo_alt,
-                preload: true
+              | image_tag: class: 'h-full object-center object-cover w-[220px] h-[auto]', alt: logo_alt, preload: true
             }}
           {% else %}
             <h1 class="text-zinc-900 text-xl font-bold truncate">{{ shop.name }}</h1>
